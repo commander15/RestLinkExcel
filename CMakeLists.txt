@@ -30,7 +30,7 @@ if (PROJECT_IS_TOP_LEVEL)
     option(RESTLINK_SUPPORT_EXCEL OFF)
 
     find_package(RestLink 2.3.0 REQUIRED)
-elseif (TARGET RestLink)
+elseif (TARGET RestLink AND NOT TARGET RestLink::RestLink)
     add_library(RestLink::RestLink ALIAS RestLink)
 else()
     message(FATAL_ERROR "Can't find RestLink core library")
