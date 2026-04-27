@@ -31,7 +31,7 @@ if (PROJECT_IS_TOP_LEVEL)
 
     find_package(RestLink 2.3.0 REQUIRED)
 elseif (TARGET RestLink)
-    if (NOT NOT TARGET RestLink::RestLink)
+    if (NOT TARGET RestLink::RestLink)
         add_library(RestLink::RestLink ALIAS RestLink)
     endif()
 else()
