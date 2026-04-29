@@ -1,7 +1,7 @@
 #include <RestLink/plugin.h>
 #include <RestLink/server.h>
 
-#include "worker.h"
+#include <worker.h>
 
 #define RESTLINK_EXCEL_IID "com.restlink.excel"
 

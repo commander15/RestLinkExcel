@@ -24,18 +24,24 @@ find_package(Qt6 REQUIRED COMPONENTS ${QT_MODULES})
 
 # RestLink
 
+set(RESTLINK_REQUIRED_VERSION 2.3.1)
+
 if (PROJECT_IS_TOP_LEVEL)
     option(RESTLINK_BUILD_CLI     OFF)
     option(RESTLINK_BUILD_QML     OFF)
     option(RESTLINK_SUPPORT_EXCEL OFF)
 
-    find_package(RestLink 2.3.0 REQUIRED)
+    find_package(RestLink ${RESTLINK_REQUIRED_VERSION} REQUIRED)
 elseif (TARGET RestLink)
-    if (NOT TARGET RestLink::RestLink)
-        add_library(RestLink::RestLink ALIAS RestLink)
+    if (${RestLink_VERSION} VERSION_GREATER_EQUAL ${RESTLINK_REQUIRED_VERSION})
+        if (NOT TARGET RestLink::RestLink)
+            add_library(RestLink::RestLink ALIAS RestLink)
+        endif()
+    else()
+        message(FATAL_ERROR "RestLink Excel requires at least RestLink ${RESTLINK_REQUIRED_VERSION}")
     endif()
 else()
-    message(FATAL_ERROR "Can't find RestLink core library")
+    message(FATAL_ERROR "RestLink Excel: can't find RestLink core library")
 endif()
 
 # QXlsx
